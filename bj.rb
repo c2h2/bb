@@ -43,17 +43,18 @@ class Shoe
   end
 
   def get_a_card
-    card = nil
-    if @cards.count >= 30
-      card=@cards.pop
-    end
-    card
+    @cards.pop
   end
+  
+  def low?
+    @cards.count <= 20
+  end
+    
 
 end
 
 class Hand
-
+  attr_reader :cards
   def initialize
     @cards = []
     @soft   = false
@@ -119,7 +120,7 @@ class DealerHand < Hand
   end
 
   def feed_card?
-    !stand?
+    !stand? 
   end
 
   def feed_card card
@@ -154,3 +155,37 @@ class Person
 
 end
 
+class GameMaker
+  def initialize
+    @s = Shoe.new
+  end
+  
+  def run
+    if @s.low?
+      @s=Shoe.new #get a new deck
+    end
+  end
+  
+end
+
+class RoundMaker
+  attr_accessor :dh
+  #get dealer hand
+  def initialize shoe
+    @s = shoe
+    @dh = DealerHand.new
+  end
+  
+  def player_bet
+    
+  end
+  
+  def dealer_hand
+    @dh.c0 @s.get_a_card
+    @dh.c1 @s.get_a_card
+    while @dh.feed_card?
+      @dh.feed_card @s.get_a_card
+    end
+    puts @dh.hand_value
+  end
+end

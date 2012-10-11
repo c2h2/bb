@@ -15,7 +15,7 @@ describe "Game" do
     end
   end
   
-  it 'can calc dealer hand' do
+  it 'can calc dealer first 2 cards' do
     s=Shoe.new
     dh=DealerHand.new
     c0=s.get_a_card
@@ -23,5 +23,13 @@ describe "Game" do
     dh.c0 c0
     dh.c1 c1
     dh.hand_value.should >= 4 && dh.hand_value.should <= 21
+  end
+
+  it 'can calc dealer total hand' do
+    s=Shoe.new
+    rm=RoundMaker.new s
+    rm.dealer_hand
+    rm.dh.cards.each{|c|  c.print}
+    rm.dh.stand?.should == true
   end
 end
