@@ -134,24 +134,37 @@ class PlayerHand < Hand
   def initialize
 
   end
+  
+  def hit?
+    
+  end
+  
+  def hit
+    
+  end
 
   def double?
 
   end
-
+  
+  def split?
+    
+  end
+  
+  def split
+    
+  end
 
   def bet money
 
   end
 end
 
-class Person
+class Player
   attr_accessor :money
   def initialize money
     @money = money
   end
-
-
 
 end
 
@@ -179,6 +192,10 @@ class RoundMaker
   def player_bet
     
   end
+
+  def player_hand
+    
+  end
   
   def dealer_hand
     @dh.c0 @s.get_a_card
@@ -186,6 +203,16 @@ class RoundMaker
     while @dh.feed_card?
       @dh.feed_card @s.get_a_card
     end
-    puts @dh.hand_value
+    #puts @dh.hand_value
+  end
+end
+
+class Strategy
+  def initialize dealer_card
+    @dc = dealer_card
+  end
+  
+  def action
+    
   end
 end
